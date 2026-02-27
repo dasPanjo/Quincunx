@@ -1,0 +1,31 @@
+# Visual Studio / CMake / build artefacts
+/vs/
+.vscode/
+build/
+Build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+*.vcxproj*
+*.sln
+*.user
+*.ipch
+*.obj
+*.o
+*.exe
+*.ilk
+*.pdb
+*.idb
+*.log
+*.lib
+*.dll
+*.so
+*.dylib
+*.app
+*.out
+# Compiled Python cache
+__pycache__/
+*.pyc
+# OS files
+Thumbs.db
+.DS_Store
