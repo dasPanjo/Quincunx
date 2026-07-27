@@ -1,0 +1,12 @@
+{
+  "name": "hello-snake",
+  "version": "1.0.0",
+  "dependencies": [
+    "sdl2",
+    {
+      "name": "glad",
+      "features": [ "gl-api-33" ]
+    },
+    "glm"
+  ]
+}
