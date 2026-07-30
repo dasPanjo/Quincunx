@@ -1,21 +1,17 @@
 name: AI Code Review (Ollama)
 
-# Phase 1: manual trigger only. Once this is proven to work, add:
-#
-# on:
-#   pull_request:
-#     types: [opened, synchronize, reopened]
-#
-# so it runs automatically on every PR push/open. Until then, trigger it
-# by hand from the Actions tab, or with:
+# Runs automatically on every PR open/push. Can also still be triggered
+# manually from the Actions tab, or with:
 #   gh workflow run ai-code-review.yml -f pr_number=<PR-NUMBER>
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       pr_number:
-        description: "Pull request number to review"
-        required: true
+        description: "Pull request number to review (manual runs only)"
+        required: false
 
 jobs:
   review:
@@ -27,11 +23,11 @@ jobs:
       - name: Checkout PR
         uses: actions/checkout@v4
         with:
-          ref: refs/pull/${{ github.event.inputs.pr_number }}/head
+          ref: refs/pull/${{ github.event.pull_request.number || github.event.inputs.pr_number }}/head
 
       - name: Run Ollama review
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ./scripts/Invoke-OllamaReview.ps1 -PrNumber "${{ github.event.inputs.pr_number }}"
+          ./scripts/Invoke-OllamaReview.ps1 -PrNumber "${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
