@@ -5,8 +5,12 @@
 namespace Penjin {
     class Application {
     public:
-        Application() {}
+        Application();
+        virtual ~Application();
         int run();
+
+    private:
+        Window* window;
 
     };
 }

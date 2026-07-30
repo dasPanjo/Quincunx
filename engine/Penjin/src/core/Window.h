@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <SDL2/SDL.h>
+#include <glm/glm.hpp>
 
 namespace Penjin {
     class Window {
@@ -10,8 +12,13 @@ namespace Penjin {
         ~Window();
 
         void pollEvents();
-        bool shouldClose() const;
+        bool shouldClose() const { return !isRunning; }
         bool swapBuffers();
+
+    private:
+        bool isRunning = true;
+        SDL_GLContext glContext;
+        SDL_Window* window;
 
     };
 }
