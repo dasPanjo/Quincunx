@@ -1,11 +1,13 @@
 # Visual Studio / CMake / build artefacts
 /vs/
 .vscode/
+.idea/
 build/
 Build/
 cmake-build-*/
 CMakeCache.txt
 CMakeFiles/
+vcpkg_installed/
 *.vcxproj*
 *.sln
 *.user
