@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+
 #include <memory>
 
 namespace Penjin {
@@ -11,7 +12,6 @@ namespace Penjin {
         int run();
 
     private:
-        std::unique_ptr<Window> window;
-
+        std::unique_ptr<Window> window_;
     };
 }
