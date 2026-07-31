@@ -1,12 +1,17 @@
 #pragma once
 
 #include "Window.h"
+#include <memory>
 
 namespace Penjin {
     class Application {
     public:
-        Application() {}
+        Application();
+        virtual ~Application();
         int run();
+
+    private:
+        std::unique_ptr<Window> window;
 
     };
 }
