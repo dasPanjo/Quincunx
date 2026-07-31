@@ -1,7 +1,10 @@
 #include "Window.h"
-#include <glad/glad.h>
 
+#include <glad/glad.h>
+#include <format>
 #include <iostream>
+
+#include "../logger/Logger.h"
 
 Penjin::Window::~Window() {
     cleanup();
@@ -10,7 +13,7 @@ Penjin::Window::~Window() {
 bool Penjin::Window::createWindow(const std::string& title, int width, int height) {
     // Init SDL with the video subsystem
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        std::cerr << "SDL could not initialize! SDL Error: " << SDL_GetError() << std::endl;
+        LOG_ERROR(std::format("SDL could not initialize! SDL Error: {}", SDL_GetError()));
         return false;
     }
 
@@ -27,7 +30,7 @@ bool Penjin::Window::createWindow(const std::string& title, int width, int heigh
         width, height,
         SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (!window_) {
-        std::cerr << "Unable to create SDL Window! SDL Error: " << SDL_GetError() << std::endl;
+        LOG_ERROR(std::format("Unable to create SDL Window! SDL Error: {}", SDL_GetError()));
         cleanup();
         return false;
     }
@@ -37,21 +40,25 @@ bool Penjin::Window::createWindow(const std::string& title, int width, int heigh
     // OpenGL Context
     glContext_ = SDL_GL_CreateContext(window_);
     if (!glContext_) {
-        std::cerr << "Unable to create GL context! SDL Error: " << SDL_GetError() << std::endl;
+        LOG_ERROR(std::format("Unable to create GL context! SDL Error: {}", SDL_GetError()));
         cleanup();
         return false;
     }
 
     // OpenGL Loader
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(SDL_GL_GetProcAddress))) {
-        std::cerr << "Failed to initialize GLAD" << std::endl;
+        LOG_ERROR("Failed to initialize GLAD");
         cleanup();
         return false;
     }
 
     // Debug output
-    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "GPU: " << glGetString(GL_RENDERER) << std::endl;
+    const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+    const char* renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+
+    LOG_DEBUG(std::format("OpenGL version: {}", version ? version : "Unknown"));
+    LOG_DEBUG(std::format("GPU: {}", renderer ? renderer : "Unknown"));
+
     return true;
 }
 

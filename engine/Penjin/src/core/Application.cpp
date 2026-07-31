@@ -4,8 +4,11 @@
 #include <glad/glad.h>
 #include <glm/vec4.hpp>
 
-Penjin::Application::Application() {
+#include "../logger/Logger.h"
+#include "../logger/ConsoleSink.h"
 
+Penjin::Application::Application() {
+    Logger::Logger::get().addSink(std::make_unique<Logger::ConsoleSink>());
 }
 
 Penjin::Application::~Application() {
@@ -15,7 +18,7 @@ Penjin::Application::~Application() {
 int Penjin::Application::run() {
     window_ = std::make_unique<Window>();
     if (!window_->createWindow("Quincunx", 800, 600)) {
-        std::cerr << "Failed to create window!" << std::endl;
+        LOG_ERROR("Failed to create window!");
         return 1;
     }
 
@@ -27,6 +30,7 @@ int Penjin::Application::run() {
         glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Do something here
 
         window_->swapBuffers();
     }

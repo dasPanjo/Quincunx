@@ -9,6 +9,14 @@ add_library(Penjin
         core/Application.h
         core/Window.cpp
         core/Window.h
+        logger/LogLevel.h
+        logger/ILogSink.h
+        logger/ConsoleSink.h
+        logger/FileSink.cpp
+        logger/FileSink.h
+        logger/Logger.h
+        logger/Logger.cpp
+        logger/FileSink.cpp
 )
 
 # Header-Pfade von Penjin nach außen sichtbar machen

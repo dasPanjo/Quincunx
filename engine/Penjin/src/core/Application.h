@@ -1,8 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "Window.h"
 
-#include <memory>
 
 namespace Penjin {
     class Application {
