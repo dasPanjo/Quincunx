@@ -1,24 +1,34 @@
 #pragma once
 
-#include <iostream>
+#include <string>
 #include <SDL2/SDL.h>
-#include <glm/glm.hpp>
 
 namespace Penjin {
     class Window {
 
     public:
-        Window (int width, int height, const std::string& title);
+        Window() = default;
         ~Window();
 
+        Window(const Window&) = delete;
+        Window& operator=(const Window&) = delete;
+
+        bool createWindow(const std::string& title, int width, int height);
+
         void pollEvents();
-        bool shouldClose() const { return !isRunning; }
+        bool shouldClose() const { return shouldClose_; }
         bool swapBuffers();
 
     private:
-        bool isRunning = true;
-        SDL_GLContext glContext;
-        SDL_Window* window;
+        bool shouldClose_ = false;
+        bool sdlInitialized_ = false;
+
+        SDL_GLContext glContext_ = nullptr;
+        SDL_Window* window_ = nullptr;
+
+        SDL_Event event{};
+
+        void cleanup();
 
     };
 }
