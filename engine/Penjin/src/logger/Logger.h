@@ -21,6 +21,7 @@ namespace Penjin::Logger {
     public:
         static Logger& get();
         void addSink(std::shared_ptr<ILogSink> sink);
+        void addDefaultSinks();
         void log(LogLevel level, const char* file, int line, const char* function, const std::string& message);
     private:
         std::vector<std::shared_ptr<ILogSink>> sinks_;

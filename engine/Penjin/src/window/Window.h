@@ -3,6 +3,8 @@
 #include <string>
 #include <SDL2/SDL.h>
 
+#include "WindowSettings.h"
+
 namespace Penjin {
     class Window {
 
@@ -10,15 +12,19 @@ namespace Penjin {
         Window() = default;
         ~Window();
 
+
         Window(const Window&) = delete;
         Window& operator=(const Window&) = delete;
 
-        bool createWindow(const std::string& title, int width, int height);
+        bool createWindow(const WindowSettings& settings);
 
         void pollEvents();
         bool shouldClose() const { return shouldClose_; }
-        bool swapBuffers();
+        bool swapBuffers() const;
 
+
+        void setTitle(const std::string & string) const;
+        static void setVSync(bool vsync);
     private:
         bool shouldClose_ = false;
         bool sdlInitialized_ = false;
@@ -26,7 +32,7 @@ namespace Penjin {
         SDL_GLContext glContext_ = nullptr;
         SDL_Window* window_ = nullptr;
 
-        SDL_Event event{};
+        SDL_Event event_{};
 
         void cleanup();
 

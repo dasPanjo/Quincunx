@@ -5,12 +5,18 @@
 #include <iostream>
 
 #include "../logger/Logger.h"
+#include "WindowSettings.h"
+
+namespace {
+    using WindowMode = ::Penjin::WindowSettings::WindowMode;
+}
 
 Penjin::Window::~Window() {
     cleanup();
 }
 
-bool Penjin::Window::createWindow(const std::string& title, int width, int height) {
+bool Penjin::Window::createWindow(const WindowSettings& settings) {
+
     // Init SDL with the video subsystem
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         LOG_ERROR(std::format("SDL could not initialize! SDL Error: {}", SDL_GetError()));
@@ -24,11 +30,17 @@ bool Penjin::Window::createWindow(const std::string& title, int width, int heigh
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, SDL_TRUE); // Double buffer
 
     // Create SDL Window
+    unsigned int windowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+    switch (settings.displayMode) {
+        case WindowMode::Windowed: break;
+        case WindowMode::Borderless: windowFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP; break;
+        case WindowMode::Fullscreen: windowFlags |= SDL_WINDOW_FULLSCREEN; break;
+    }
     window_ = SDL_CreateWindow(
-        title.c_str(),
+        settings.title.c_str(),
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        width, height,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+        settings.width, settings.height,
+        windowFlags);
     if (!window_) {
         LOG_ERROR(std::format("Unable to create SDL Window! SDL Error: {}", SDL_GetError()));
         cleanup();
@@ -52,6 +64,8 @@ bool Penjin::Window::createWindow(const std::string& title, int width, int heigh
         return false;
     }
 
+    setVSync(settings.vsync);
+
     // Debug output
     const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
     const char* renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
@@ -63,19 +77,27 @@ bool Penjin::Window::createWindow(const std::string& title, int width, int heigh
 }
 
 void Penjin::Window::pollEvents() {
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+    while (SDL_PollEvent(&event_)) {
+        if (event_.type == SDL_QUIT) {
             shouldClose_ = true;
         }
-        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
+        if (event_.type == SDL_KEYDOWN && event_.key.keysym.sym == SDLK_ESCAPE) {
             shouldClose_ = true;
         }
     }
 }
 
-bool Penjin::Window::swapBuffers() {
+bool Penjin::Window::swapBuffers() const {
     SDL_GL_SwapWindow(window_);
     return true;
+}
+void Penjin::Window::setTitle(const std::string &string) const {
+    SDL_SetWindowTitle(window_, string.c_str());
+}
+void Penjin::Window::setVSync(bool vsync) {
+    if (SDL_GL_SetSwapInterval(vsync ? 1 : 0) != 0) {
+        LOG_WARN(std::format("SDL_GL_SetSwapInterval failed: {}", SDL_GetError()));
+    }
 }
 
 void Penjin::Window::cleanup() {

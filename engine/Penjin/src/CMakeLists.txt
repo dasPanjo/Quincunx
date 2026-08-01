@@ -7,8 +7,12 @@ find_package(glm CONFIG REQUIRED)
 add_library(Penjin
         core/Application.cpp
         core/Application.h
-        core/Window.cpp
-        core/Window.h
+        time/Time.cpp
+        time/Time.h
+        window/Window.cpp
+        window/Window.h
+        window/WindowSettings.cpp
+        window/WindowSettings.h
         logger/LogLevel.h
         logger/ILogSink.h
         logger/ConsoleSink.h
@@ -16,13 +20,13 @@ add_library(Penjin
         logger/FileSink.h
         logger/Logger.h
         logger/Logger.cpp
-        logger/FileSink.cpp
 )
 
 # Header-Pfade von Penjin nach außen sichtbar machen
 target_include_directories(Penjin
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/window
 )
 
 # External Dependencies an Penjin hängen

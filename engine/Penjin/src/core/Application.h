@@ -2,17 +2,21 @@
 
 #include <memory>
 
-#include "Window.h"
-
+#include "../time/Time.h"
+#include "../window/Window.h"
 
 namespace Penjin {
     class Application {
     public:
         Application();
         virtual ~Application();
-        int run();
+        virtual int run(const WindowSettings& settings);
 
-    private:
+    protected:
         std::unique_ptr<Window> window_;
+        Time time_;
+
+        virtual void tick() {}
+        virtual void draw() {}
     };
 }
