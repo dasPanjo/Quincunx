@@ -3,6 +3,11 @@
 
 #include <chrono>
 
+Penjin::Time& Penjin::Time::get() {
+    static Time instance;
+    return instance;
+}
+
 Penjin::Time::Time() {
     reset();
 }

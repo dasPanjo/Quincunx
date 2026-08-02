@@ -14,7 +14,6 @@ namespace Penjin {
 
     protected:
         std::unique_ptr<Window> window_;
-        Time time_;
 
         virtual void tick() {}
         virtual void draw() {}

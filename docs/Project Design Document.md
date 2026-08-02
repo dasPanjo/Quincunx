@@ -404,6 +404,35 @@ The game remains identical.
 
 ---
 
+## Engine Services (Logger, Time, Input)
+
+Cross-cutting engine services that need to be reachable from arbitrary,
+deeply-nested code — not just from `Application` or `Game` directly — are
+implemented as singletons with a `static X& get()` accessor: `Logger`,
+`Time`, and `Input`.
+
+This matters once the planned Component/Behaviour system (see Roadmap,
+Phase 7) exists: a `Behaviour` attached to a `GameObject` is called back by
+the engine (`onUpdate()` or similar) without control over the parameter
+list, and can sit arbitrarily deep in a `Scene → GameObject → Component`
+hierarchy. Threading `Input&`/`Time&` through every layer of that hierarchy
+just so a leaf `Behaviour` can ask "is W pressed?" or "what's delta time?"
+would mean touching every intermediate class whenever a new service is
+added — the same reasoning that already justified `Logger` being callable
+from anywhere via `LOG_ERROR(...)` without a passed-in reference.
+
+Concretely: `Time::get().deltaTime()` and `Input::get().isKeyDown(KeyCode::W)`
+are callable from any `Behaviour`, regardless of nesting, without the engine
+needing to pass a context object down through every intermediate owner.
+
+The trade-off is accepted deliberately: this makes having two independent
+input/time states (e.g. local split-screen, or isolated unit tests) harder
+to retrofit later. That's judged acceptable for now — Quincunx is single
+window, single player — and consistent with the project's "no premature
+generalization" principle (Development Principles, #5).
+
+---
+
 # 13. Git Strategy
 
 Engine and game are developed together, in one repository.

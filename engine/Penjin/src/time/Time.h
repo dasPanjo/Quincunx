@@ -6,6 +6,8 @@
 namespace Penjin {
     class Time {
     public:
+        static Time& get();
+
         Time();
         virtual ~Time() = default;
 

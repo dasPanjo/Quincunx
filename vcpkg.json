@@ -7,6 +7,13 @@
       "name": "glad",
       "features": [ "gl-api-33" ]
     },
-    "glm"
+    "glm",
+    {
+      "name": "imgui",
+      "features": [
+        "sdl3-binding",
+        "opengl3-binding"
+      ]
+    }
   ]
 }

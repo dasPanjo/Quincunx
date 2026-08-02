@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 
 #include "WindowSettings.h"
 
@@ -28,6 +28,7 @@ namespace Penjin {
     private:
         bool shouldClose_ = false;
         bool sdlInitialized_ = false;
+        bool imguiInitialized_ = false;
 
         SDL_GLContext glContext_ = nullptr;
         SDL_Window* window_ = nullptr;
