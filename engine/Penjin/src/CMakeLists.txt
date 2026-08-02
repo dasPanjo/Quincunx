@@ -1,27 +1,44 @@
 # External Dependencies suchen
-find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
-# Penjin-Library definieren
 add_library(Penjin
         core/Application.cpp
         core/Application.h
-        core/Window.cpp
-        core/Window.h
+        time/Time.cpp
+        time/Time.h
+        window/Window.cpp
+        window/Window.h
+        window/WindowSettings.cpp
+        window/WindowSettings.h
+        logger/LogLevel.h
+        logger/ILogSink.h
+        logger/ConsoleSink.h
+        logger/FileSink.cpp
+        logger/FileSink.h
+        logger/Logger.h
+        logger/Logger.cpp
+        input/Input.cpp
+        input/Input.h
+        input/KeyCode.h
+        input/MouseButton.h
+        renderer/OpenGLRenderer.cpp
+        renderer/OpenGLRenderer.h
+        renderer/IRenderer.h
 )
 
-# Header-Pfade von Penjin nach außen sichtbar machen
 target_include_directories(Penjin
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/window
 )
 
-# External Dependencies an Penjin hängen
 target_link_libraries(Penjin
         PUBLIC
-        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
-        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+        $<IF:$<TARGET_EXISTS:SDL3::SDL3>,SDL3::SDL3,SDL3::SDL3-static>
         glad::glad
         glm::glm
+        imgui::imgui
 )

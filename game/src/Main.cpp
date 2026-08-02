@@ -1,8 +1,7 @@
 #include <Application.h>
+#include <WindowSettings.h>
 
-#include <iostream>
-
-int main() {
+int main(int argc, char** argv) {
     Penjin::Application app;
-    app.run();
+    return app.run(Penjin::WindowSettings::fromArgs(argc, argv));
 }
