@@ -13,10 +13,12 @@ namespace Penjin {
         ~Window();
 
 
+
         Window(const Window&) = delete;
         Window& operator=(const Window&) = delete;
 
         bool createWindow(const WindowSettings& settings);
+        void closeWindow();
 
         void pollEvents();
         bool shouldClose() const { return shouldClose_; }

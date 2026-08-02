@@ -41,9 +41,17 @@ void Penjin::Input::processEvent(const SDL_Event& event) {
             break;
         }
         case SDL_EVENT_MOUSE_MOTION: {
+            int windowWidth, windowHeight;
+            SDL_Window* currentWindow = SDL_GetWindowFromID(event.motion.windowID); //Maybe too slow?
+            SDL_GetWindowSize(currentWindow, &windowWidth, &windowHeight);
+
             const glm::ivec2 newPosition{event.motion.x, event.motion.y};
             mouseDelta_ += newPosition - mousePosition_;
             mousePosition_ = newPosition;
+            mousePositionRelative_ = glm::vec2{
+                (float)event.motion.x / windowWidth,
+                (float)event.motion.y / windowHeight
+            };
             break;
         }
         case SDL_EVENT_MOUSE_WHEEL: {
@@ -71,16 +79,4 @@ bool Penjin::Input::isKeyReleased(KeyCode key) const {
 
 bool Penjin::Input::isMouseButtonDown(MouseButton button) const {
     return currentMouseButtons_[static_cast<std::size_t>(button)];
-}
-
-glm::ivec2 Penjin::Input::mousePosition() const {
-    return mousePosition_;
-}
-
-glm::ivec2 Penjin::Input::mouseDelta() const {
-    return mouseDelta_;
-}
-
-int Penjin::Input::scrollDelta() const {
-    return scrollDelta_;
 }

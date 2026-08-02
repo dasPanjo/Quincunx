@@ -1,6 +1,5 @@
 #include "Window.h"
 
-#include <glad/glad.h>
 #include <iostream>
 #include <format>
 
@@ -62,13 +61,6 @@ bool Penjin::Window::createWindow(const WindowSettings& settings) {
         return false;
     }
 
-    // OpenGL Loader
-    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(SDL_GL_GetProcAddress))) {
-        LOG_ERROR("Failed to initialize GLAD");
-        cleanup();
-        return false;
-    }
-
     setVSync(settings.vsync);
 
     // ImGui initialization
@@ -90,14 +82,12 @@ bool Penjin::Window::createWindow(const WindowSettings& settings) {
     }
     imguiInitialized_ = true;
 
-    // Debug output
-    const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
-    const char* renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
-
-    LOG_DEBUG(std::format("OpenGL version: {}", version ? version : "Unknown"));
-    LOG_DEBUG(std::format("GPU: {}", renderer ? renderer : "Unknown"));
 
     return true;
+}
+
+void Penjin::Window::closeWindow() {
+    shouldClose_ = true;
 }
 
 void Penjin::Window::pollEvents() {

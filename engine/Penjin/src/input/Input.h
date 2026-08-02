@@ -19,11 +19,12 @@ namespace Penjin {
         bool isKeyDown(KeyCode key) const;
         bool isKeyPressed(KeyCode key) const;
         bool isKeyReleased(KeyCode key) const;
-
         bool isMouseButtonDown(MouseButton button) const;
-        glm::ivec2 mousePosition() const;
-        glm::ivec2 mouseDelta() const;
-        int scrollDelta() const;
+
+        glm::ivec2 mousePosition() const {return mousePosition_;}
+        glm::vec2 mousePositionRelative() const{return mousePositionRelative_;}
+        glm::ivec2 mouseDelta() const{ return mouseDelta_;}
+        int scrollDelta() const {return scrollDelta_;}
 
     private:
         std::array<bool, KeyCodeCount> currentKeys_{};
@@ -33,6 +34,7 @@ namespace Penjin {
         std::array<bool, MouseButtonCount> previousMouseButtons_{};
 
         glm::ivec2 mousePosition_{};
+        glm::vec2 mousePositionRelative_{};
         glm::ivec2 mouseDelta_{};
         int scrollDelta_ = 0;
     };

@@ -24,6 +24,9 @@ add_library(Penjin
         input/Input.h
         input/KeyCode.h
         input/MouseButton.h
+        renderer/OpenGLRenderer.cpp
+        renderer/OpenGLRenderer.h
+        renderer/IRenderer.h
 )
 
 target_include_directories(Penjin
