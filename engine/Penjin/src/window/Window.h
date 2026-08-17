@@ -21,8 +21,8 @@ namespace Penjin {
         void closeWindow();
 
         void pollEvents();
-        bool shouldClose() const { return shouldClose_; }
-        bool swapBuffers() const;
+        [[nodiscard]] bool shouldClose() const { return shouldClose_; }
+        [[nodiscard]] bool swapBuffers() const;
 
 
         void setTitle(const std::string & string) const;

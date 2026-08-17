@@ -27,11 +27,35 @@ add_library(Penjin
         renderer/OpenGLRenderer.cpp
         renderer/OpenGLRenderer.h
         renderer/IRenderer.h
+        scene/Component.cpp
+        scene/Component.h
+        scene/GameObject.cpp
+        scene/GameObject.h
+        scene/Transform.cpp
+        scene/Transform.h
+        scene/Scene.cpp
+        scene/Scene.h
+        graphics/MeshRenderer.cpp
+        graphics/MeshRenderer.h
+        graphics/Mesh.cpp
+        graphics/Mesh.h
+        graphics/Shader.cpp
+        graphics/Shader.h
+        graphics/Material.cpp
+        graphics/Material.h
+        debug/Profiler.cpp
+        debug/Profiler.h
+        logger/ErrorCodes.h
 )
 
 target_include_directories(Penjin
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/input
+        ${CMAKE_CURRENT_SOURCE_DIR}/logger
+        ${CMAKE_CURRENT_SOURCE_DIR}/graphics
+        ${CMAKE_CURRENT_SOURCE_DIR}/scene
+        ${CMAKE_CURRENT_SOURCE_DIR}/time
         ${CMAKE_CURRENT_SOURCE_DIR}/window
 )
 

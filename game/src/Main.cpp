@@ -1,7 +1,10 @@
 #include <Application.h>
 #include <WindowSettings.h>
 
+#include "Quincunx.h"
+
 int main(int argc, char** argv) {
-    Penjin::Application app;
-    return app.run(Penjin::WindowSettings::fromArgs(argc, argv));
+    Quincunx app;
+    int result = app.run(Penjin::WindowSettings::fromArgs(argc, argv));
+    return result;
 }

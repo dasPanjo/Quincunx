@@ -34,3 +34,9 @@ void Penjin::OpenGLRenderer::beginFrame(const glm::vec4 &clearColor) {
 
 void Penjin::OpenGLRenderer::endFrame() {
 }
+
+void Penjin::OpenGLRenderer::setViewProjection(const glm::mat4 &view, const glm::mat4 &projection) {
+}
+
+void Penjin::OpenGLRenderer::drawMesh(const Mesh &mesh, const Material &material, const glm::mat4 &modelMatrix) {
+}

@@ -16,15 +16,15 @@ namespace Penjin {
         void beginFrame();
         void processEvent(const SDL_Event& event);
 
-        bool isKeyDown(KeyCode key) const;
-        bool isKeyPressed(KeyCode key) const;
-        bool isKeyReleased(KeyCode key) const;
-        bool isMouseButtonDown(MouseButton button) const;
+        [[nodiscard]] bool isKeyDown(KeyCode key) const;
+        [[nodiscard]] bool isKeyPressed(KeyCode key) const;
+        [[nodiscard]] bool isKeyReleased(KeyCode key) const;
+        [[nodiscard]] bool isMouseButtonDown(MouseButton button) const;
 
-        glm::ivec2 mousePosition() const {return mousePosition_;}
-        glm::vec2 mousePositionRelative() const{return mousePositionRelative_;}
-        glm::ivec2 mouseDelta() const{ return mouseDelta_;}
-        int scrollDelta() const {return scrollDelta_;}
+        [[nodiscard]] glm::ivec2 mousePosition() const {return mousePosition_;}
+        [[nodiscard]] glm::vec2 mousePositionRelative() const{return mousePositionRelative_;}
+        [[nodiscard]] glm::ivec2 mouseDelta() const{ return mouseDelta_;}
+        [[nodiscard]] int scrollDelta() const {return scrollDelta_;}
 
     private:
         std::array<bool, KeyCodeCount> currentKeys_{};

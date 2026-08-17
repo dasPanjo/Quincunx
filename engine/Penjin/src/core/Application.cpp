@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <format>
+#include <stdexcept>
 
 #include <glm/vec4.hpp>
 
@@ -12,29 +13,49 @@
 #include "../logger/Logger.h"
 #include "../logger/ConsoleSink.h"
 #include "../input/Input.h"
+#include "../debug/Profiler.h"
 #include "../renderer/OpenGLRenderer.h"
 
+Penjin::Application* Penjin::Application::instance_ = nullptr;
+
+Penjin::Application& Penjin::Application::get() {
+    if (!instance_) {
+        throw std::runtime_error("Penjin::Application::get() called before an Application was constructed");
+    }
+    return *instance_;
+}
 
 Penjin::Application::Application() {
+    if (instance_) {
+        throw std::runtime_error("Only one Penjin::Application instance may exist at a time");
+    }
+    instance_ = this;
+
     Logger::Logger::get().addDefaultSinks();
 }
 
-Penjin::Application::~Application() = default;
+Penjin::Application::~Application() {
+    instance_ = nullptr;
+}
 
 int Penjin::Application::run(const WindowSettings& settings) {
+    errorCode_ = static_cast<int>(ErrorCode::None);
+
     window_ = std::make_unique<Window>();
     if (!window_->createWindow(settings)) {
         LOG_ERROR("Failed to create window!");
-        return 1;
+        return static_cast<int>(ErrorCode::WindowCreationFailed);
     }
 
     renderer_ = std::make_unique<OpenGLRenderer>();
     if (!renderer_->init()) {
         LOG_ERROR("Failed to initialize Renderer!");
-        return 1;
+        return static_cast<int>(ErrorCode::RendererInitFailed);
     }
 
+    scene_ = std::make_unique<Scene>();
     glm::vec4 clearColor( 0.036f, 0.047f, 0.078f, 1.0f);
+    start();
     while (!window_->shouldClose()) {
         Time::get().tick();
         Input::get().beginFrame();
@@ -47,25 +68,35 @@ int Penjin::Application::run(const WindowSettings& settings) {
 
         renderer_->beginFrame(clearColor);
         draw();
+        Profiler::draw();
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         window_->swapBuffers();
         renderer_->endFrame();
-
+        Profiler::endFrame();
     }
-
     renderer_->cleanup();
-    return 0;
+
+    LOG_DEBUG(std::format("Application is closing with error code {} ({})",
+            errorCode_, errorCode_ == 0 ? "Normally" : errorDescription(errorCode_)));
+    return errorCode_;
 }
 
+void Penjin::Application::quit(ErrorCode code) {
+    quit(static_cast<int>(code));
+}
 void Penjin::Application::quit(int code) {
-    LOG_DEBUG(std::format("Application is closing with code {}{}", code, code == 0 ? "(Normally)" : ""));
+    errorCode_ = code;
     window_->closeWindow();
 }
 
+void Penjin::Application::start() {
+}
+
 void Penjin::Application::tick() {
-    window_->setTitle(std::format("Quincunx - {:0.3f}ms ({:3.0f}fps)", Time::get().deltaTimeMs(), 1.0f / Time::get().deltaTime()));
+    scene_->tick();
 }
 
 void Penjin::Application::draw() {
+    scene_->draw(*renderer_);
 }

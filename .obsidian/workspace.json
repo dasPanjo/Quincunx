@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "d3ef832c46db5136",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f30e70e1a0a3587",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "790b1336d5da58bc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Phase3RenderingChecklist.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Phase3RenderingChecklist"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "dab6e39d756f1bba",
+    "type": "split",
+    "children": [
+      {
+        "id": "5e778be6af51fc23",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8e03bd254632f4df",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Dateiexplorer"
+            }
+          },
+          {
+            "id": "c3921434d58c1378",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Suchen"
+            }
+          },
+          {
+            "id": "90c6e54c77c9aea5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Lesezeichen"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e502cf637ad99d59",
+    "type": "split",
+    "children": [
+      {
+        "id": "77a2187fbe61fdd0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d5315ea6d0e3f585",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/Phase3RenderingChecklist.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Rückverweise"
+            }
+          },
+          {
+            "id": "d1f1e55f3db17a31",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/Phase3RenderingChecklist.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Ausgehende Links"
+            }
+          },
+          {
+            "id": "70f3d243d4adb852",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "0f9f0cdabd067643",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Alle Eigenschaften"
+            }
+          },
+          {
+            "id": "fcdaa3cea26d7574",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/Phase3RenderingChecklist.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Gliederung"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Schnellauswahl öffnen": false,
+      "graph:Graph-Ansicht öffnen": false,
+      "canvas:Neuen Canvas erstellen": false,
+      "daily-notes:Heutige Notiz öffnen": false,
+      "templates:Vorlage einfügen": false,
+      "command-palette:Befehlspalette öffnen": false,
+      "bases:Neue Base erstellen": false
+    }
+  },
+  "active": "790b1336d5da58bc",
+  "lastOpenFiles": [
+    "cmake-build-debug/game/src/CMakeFiles/Quincunx.dir/link.d",
+    "cmake-build-debug/engine/Penjin/src/st3CukON",
+    "cmake-build-debug/engine/Penjin/src/stsw8XLt",
+    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Shader.cpp.o.d",
+    "engine/Penjin/src/graphics/Shader.cpp~",
+    "cmake-build-debug/game/src/CMakeFiles/Quincunx.dir/Main.cpp.o.d",
+    "cmake-build-debug/engine/Penjin/src/stdWKTh6",
+    "cmake-build-debug/engine/Penjin/src/stV3Sv8I",
+    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Mesh.cpp.o.d",
+    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Material.cpp.o.d",
+    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/scene/Scene.cpp.o.d",
+    "README.md"
+  ]
+}

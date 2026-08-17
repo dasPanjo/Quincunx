@@ -122,7 +122,6 @@ namespace Penjin {
     inline constexpr KeyCode KeypadPeriod{SDL_SCANCODE_KP_PERIOD};
 
     inline constexpr KeyCode NonUsBackslash{SDL_SCANCODE_NONUSBACKSLASH};
-    inline constexpr KeyCode Application{SDL_SCANCODE_APPLICATION};
     inline constexpr KeyCode Power{SDL_SCANCODE_POWER};
     inline constexpr KeyCode KeypadEquals{SDL_SCANCODE_KP_EQUALS};
     inline constexpr KeyCode F13{SDL_SCANCODE_F13};
