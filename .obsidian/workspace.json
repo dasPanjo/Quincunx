@@ -190,17 +190,17 @@
   },
   "active": "790b1336d5da58bc",
   "lastOpenFiles": [
-    "cmake-build-debug/game/src/CMakeFiles/Quincunx.dir/link.d",
-    "cmake-build-debug/engine/Penjin/src/st3CukON",
-    "cmake-build-debug/engine/Penjin/src/stsw8XLt",
-    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Shader.cpp.o.d",
+    "game/src/Quincunx.h~",
+    "engine/Penjin/src/graphics/MeshRenderer.h~",
+    "engine/Penjin/src/graphics/Material.cpp~",
     "engine/Penjin/src/graphics/Shader.cpp~",
-    "cmake-build-debug/game/src/CMakeFiles/Quincunx.dir/Main.cpp.o.d",
-    "cmake-build-debug/engine/Penjin/src/stdWKTh6",
-    "cmake-build-debug/engine/Penjin/src/stV3Sv8I",
-    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Mesh.cpp.o.d",
-    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/graphics/Material.cpp.o.d",
-    "cmake-build-debug/engine/Penjin/src/CMakeFiles/Penjin.dir/scene/Scene.cpp.o.d",
+    "engine/Penjin/src/graphics/Material.h~",
+    "engine/Penjin/src/graphics/Mesh.h~",
+    "engine/Penjin/src/graphics/Model.cpp~",
+    "engine/Penjin/src/graphics/MeshRenderer.cpp~",
+    "engine/Penjin/src/scene/GameObject.cpp~",
+    "engine/Penjin/src/scene/Transform.cpp~",
+    "engine/Penjin/src/scene/Transform.h~",
     "README.md"
   ]
 }

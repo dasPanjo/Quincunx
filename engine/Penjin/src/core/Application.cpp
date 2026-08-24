@@ -54,7 +54,7 @@ int Penjin::Application::run(const WindowSettings& settings) {
     }
 
     scene_ = std::make_unique<Scene>();
-    glm::vec4 clearColor( 0.036f, 0.047f, 0.078f, 1.0f);
+    glm::vec4 clearColor( 0.236f, 0.347f, 0.478f, 1.0f);
     start();
     while (!window_->shouldClose()) {
         Time::get().tick();

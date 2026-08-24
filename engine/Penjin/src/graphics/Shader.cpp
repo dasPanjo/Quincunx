@@ -49,7 +49,6 @@ std::shared_ptr<Penjin::Shader> Penjin::Shader::createFromSource(const std::stri
         return nullptr;
     }
 
-    glUseProgram(programId);
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
@@ -65,16 +64,31 @@ std::shared_ptr<Penjin::Shader> Penjin::Shader::createUnlitColor() {
         "layout(location = 1) in vec3 aNormal;"
         "layout(location = 2) in vec2 aUV;"
 
+        "uniform mat4 uModel;"
+        "uniform mat4 uView;"
+        "uniform mat4 uProjection;"
+
+        "out vec3 fragPos;"
+        "out vec3 normal;"
+        "out vec2 texCoord;"
+
         "void main() { "
-        "   gl_Position = vec4(aPosition.x, aPosition.y, aPosition.z, 1.0); "
+        "   texCoord = aUV;"
+        "   gl_Position = uModel * vec4(aPosition, 1.0);"
         "}";
 
     const std::string fragmentSource =
         "#version 330 core \n"
+
+        "in vec3 fragPos;"
+        "in vec3 normal;"
+        "in vec2 texCoord;"
+
         "out vec4 FragColor;"
         "uniform vec4 uColor;"
+
         "void main() { "
-        "   FragColor = uColor; "
+        "   FragColor = uColor;"
         "}";
 
     return createFromSource(vertexSource, fragmentSource);

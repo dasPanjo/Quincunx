@@ -5,6 +5,7 @@
 #include <SDL3/SDL.h>
 
 #include "../logger/Logger.h"
+#include "../debug/Profiler.h"
 
 bool Penjin::OpenGLRenderer::init() {
 
@@ -39,4 +40,11 @@ void Penjin::OpenGLRenderer::setViewProjection(const glm::mat4 &view, const glm:
 }
 
 void Penjin::OpenGLRenderer::drawMesh(const Mesh &mesh, const Material &material, const glm::mat4 &modelMatrix) {
+    material.bind();
+    material.shader_->setMat4("uModel", modelMatrix);
+    glBindVertexArray(mesh.vao());
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mesh.indices().size()), GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(0);
+    Profiler::vertexCount+= mesh.vertices().size();
+    Profiler::drawCalls++;
 }

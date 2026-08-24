@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "Mesh.h"
+#include "Model.h"
 #include "../scene/Component.h"
 #include "../renderer/IRenderer.h"
 
@@ -12,7 +12,7 @@ namespace Penjin {
     public:
         void start() override;
         void draw(IRenderer &renderer) const override;
-        std::unique_ptr<Mesh> mesh_;
+        std::shared_ptr<Model> model_;
         std::vector<std::shared_ptr<Material>> materials_;
     };
 }

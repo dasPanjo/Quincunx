@@ -46,6 +46,8 @@ add_library(Penjin
         debug/Profiler.cpp
         debug/Profiler.h
         logger/ErrorCodes.h
+        graphics/Model.cpp
+        graphics/Model.h
 )
 
 target_include_directories(Penjin

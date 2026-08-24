@@ -8,6 +8,13 @@
 #include "../debug/Profiler.h"
 
 Penjin::Mesh::Mesh() {
+}
+
+Penjin::Mesh::~Mesh() {
+}
+
+bool Penjin::Mesh::loadDemo() {
+
     // Vertex 0
     vertices_.push_back({
         glm::vec3(-0.5f, -0.5f, 0.0f),
@@ -40,13 +47,11 @@ Penjin::Mesh::Mesh() {
         0, 1, 2,
         2, 3, 0
     };
+
+    return createVertexArray();
 }
 
-Penjin::Mesh::~Mesh() {
-
-}
-
-bool Penjin::Mesh::load() {
+bool Penjin::Mesh::createVertexArray() {
 
     // 1) Ask OpenGL for object IDs (handles) for one VAO, one VBO, one EBO.
     //    These IDs reference driver-managed GPU objects.
@@ -114,10 +119,3 @@ bool Penjin::Mesh::load() {
     return true;
 }
 
-void Penjin::Mesh::draw() const {
-    glBindVertexArray(VAO_);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices_.size()), GL_UNSIGNED_INT, nullptr);
-    glBindVertexArray(0);
-    Profiler::vertexCount+= vertices_.size();
-    Profiler::drawCalls++;
-}

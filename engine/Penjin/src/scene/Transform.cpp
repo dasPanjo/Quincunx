@@ -26,6 +26,11 @@ Transform::~Transform()
     children_.clear();
 }
 
+void Transform::rotate(glm::vec3 vec) {
+    glm::quat delta = glm::quat(vec);
+    localRotation *= delta;
+}
+
 glm::mat4 Transform::localMatrix() const
 {
     return glm::translate(glm::mat4(1.0f), localPosition)

@@ -17,6 +17,8 @@ namespace Penjin {
 
         [[nodiscard]] GameObject& gameObject() const { return *gameObject_; }
 
+        void rotate(glm::vec3 vec);
+
         glm::vec3 localPosition{0.0f};
         glm::quat localRotation{1.0f, 0.0f, 0.0f, 0.0f};
         glm::vec3 localScale{1.0f};
