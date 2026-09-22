@@ -33,7 +33,6 @@ namespace Penjin {
         std::unique_ptr<Window> window_;
         std::unique_ptr<IRenderer> renderer_;
         std::unique_ptr<Scene> scene_;
-
         int errorCode_;
     };
 }

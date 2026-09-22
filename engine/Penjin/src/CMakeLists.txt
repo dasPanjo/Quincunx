@@ -48,6 +48,8 @@ add_library(Penjin
         logger/ErrorCodes.h
         graphics/Model.cpp
         graphics/Model.h
+        graphics/Camera.cpp
+        graphics/Camera.h
 )
 
 target_include_directories(Penjin

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/vec2.hpp>
 #include <SDL3/SDL.h>
 
 #include "WindowSettings.h"
@@ -12,6 +13,9 @@ namespace Penjin {
         Window() = default;
         ~Window();
 
+        glm::ivec2 windowSize();
+        int width();
+        int height();
 
 
         Window(const Window&) = delete;

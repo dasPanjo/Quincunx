@@ -24,6 +24,10 @@ class Quincunx : public Penjin::Application {
                 return;
             }
 
+            auto cameraGo = &scene().createGameObject("Main camera");
+            auto& mainCamera = cameraGo->addComponent<Penjin::Camera>();
+            scene().mainCamera = &mainCamera;
+
             testGameObject1_ = &scene().createGameObject("Quad 1");
             auto& meshRenderer1 = testGameObject1_->addComponent<Penjin::MeshRenderer>();
 

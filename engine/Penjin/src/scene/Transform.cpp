@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include "GameObject.h"
+#include "Logger.h"
+
 namespace Penjin {
 
 Transform::Transform(GameObject* gameObject)

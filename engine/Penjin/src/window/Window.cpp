@@ -20,6 +20,24 @@ Penjin::Window::~Window() {
     cleanup();
 }
 
+glm::ivec2 Penjin::Window::windowSize() {
+    int width, height;
+    SDL_GetWindowSize(window_, &width, &height);
+    return glm::ivec2(width, height);
+}
+
+int Penjin::Window::width() {
+    int width, height;
+    SDL_GetWindowSize(window_, &width, &height);
+    return width;
+}
+
+int Penjin::Window::height() {
+    int width, height;
+    SDL_GetWindowSize(window_, &width, &height);
+    return height;
+}
+
 bool Penjin::Window::createWindow(const WindowSettings& settings) {
 
     // Init SDL with the video subsystem
