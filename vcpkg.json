@@ -2,7 +2,7 @@
   "name": "quincunx",
   "version": "1.0.0",
   "dependencies": [
-    "sdl2",
+    "sdl3",
     {
       "name": "glad",
       "features": [ "gl-api-33" ]

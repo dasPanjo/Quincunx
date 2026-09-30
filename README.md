@@ -40,6 +40,46 @@ cmake --build . --config Debug
 
 ```
 
+## How to contribute (Linux)
+
+If vcpkg is not installed, set it up with:
+
+```bash
+git clone https://github.com/microsoft/vcpkg.git ~/vcpkg
+~/vcpkg/bootstrap-vcpkg.sh
+export VCPKG_ROOT=~/vcpkg
+```
+
+Add the `export VCPKG_ROOT=~/vcpkg` line to `~/.bashrc` (or equivalent) so it persists across shell sessions.
+
+Then configure and build the project:
+
+```bash
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+cmake --build build
+```
+
+Requirements:
+
+- CMake >= 3.15
+- A C++17 compiler (e.g. `g++` or `clang++`)
+- Build tools for vcpkg itself (e.g. `build-essential`, `curl`, `zip`, `unzip`, `tar`, `pkg-config` on Debian/Ubuntu)
+- `autoconf`, `automake`, `libtool`, `autoconf-archive` — required by vcpkg to build `libxcrypt` (a transitive dependency of SDL3 on Linux):
+  ```bash
+  sudo apt install autoconf automake libtool autoconf-archive
+  ```
+
+### CLion (Linux)
+
+CLion's built-in vcpkg integration (Settings → Build, Execution, Deployment → vcpkg) is not available on Linux. Instead, set the toolchain file manually:
+
+1. Settings → Build, Execution, Deployment → **CMake**
+2. For each profile (e.g. Debug), add to **CMake options**:
+   ```
+   -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+   ```
+3. **Apply**, then **"Reset Cache and Reload Project"** (a plain reload keeps the stale cache and the error persists).
+
 ---
 
 ## Repository Setup (one-time)
