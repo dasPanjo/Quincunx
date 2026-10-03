@@ -16,7 +16,7 @@ namespace Penjin {
 
         static std::optional<WindowMode> fromString(std::string_view text);
 
-        std::string title = "Quincunx";
+        std::string title = "Penjin";
         int width = 1280;
         int height = 720;
         bool vsync = true;

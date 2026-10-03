@@ -540,6 +540,10 @@ The root `CMakeLists.txt` owns the single top-level project and pulls in both `e
 
 **Result:** A freely viewable 3D scene.
 
+See `docs/Phase3RenderingChecklist.md` for the detailed, ordered checklist —
+including the `GameObject`/`Component`/`Transform` scene system design that
+this phase (and every later one) builds on.
+
 ---
 
 ## Phase 4 – Gameplay

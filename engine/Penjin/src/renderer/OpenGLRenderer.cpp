@@ -4,7 +4,9 @@
 #include <glad/glad.h>
 #include <SDL3/SDL.h>
 
+#include "Application.h"
 #include "../logger/Logger.h"
+#include "../debug/Profiler.h"
 
 bool Penjin::OpenGLRenderer::init() {
 
@@ -21,6 +23,10 @@ bool Penjin::OpenGLRenderer::init() {
 
     LOG_DEBUG(std::format("OpenGL version: {}", version ? version : "Unknown"));
     LOG_DEBUG(std::format("GPU: {}", renderer ? renderer : "Unknown"));
+
+    glEnable(GL_DEPTH_TEST);
+
+
     return true;
 }
 
@@ -29,8 +35,26 @@ void Penjin::OpenGLRenderer::cleanup() {
 
 void Penjin::OpenGLRenderer::beginFrame(const glm::vec4 &clearColor) {
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Penjin::OpenGLRenderer::endFrame() {
+}
+
+void Penjin::OpenGLRenderer::setViewProjection(const glm::mat4 &view, const glm::mat4 &projection) {
+    viewMatrix_ = view;
+    projectionMatrix_ = projection;
+}
+
+void Penjin::OpenGLRenderer::drawMesh(const Mesh &mesh, const Material &material, const glm::mat4 &modelMatrix) {
+    material.bind();
+    material.shader_->setMat4("uModel", modelMatrix);
+    material.shader_->setMat4("uView", viewMatrix_);
+    material.shader_->setMat4("uProjection", projectionMatrix_);
+
+    glBindVertexArray(mesh.vao());
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mesh.indices().size()), GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(0);
+    Profiler::vertexCount+= mesh.vertices().size();
+    Profiler::drawCalls++;
 }

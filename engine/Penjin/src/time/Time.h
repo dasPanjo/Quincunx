@@ -14,7 +14,7 @@ namespace Penjin {
         void reset();
         void tick();
 
-        float deltaTime() const { return deltaTime_;}
+        [[nodiscard]] float deltaTime() const { return deltaTime_;}
         float deltaTimeMs() const { return deltaTime_ * 1000.0f; }
         int64_t totalNanoseconds() const { return totalNanoseconds_; }
         int64_t totalNanosecondsMs() const { return totalNanoseconds_ / 1000000; }

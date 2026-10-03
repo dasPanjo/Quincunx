@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/vec2.hpp>
 #include <SDL3/SDL.h>
 
 #include "WindowSettings.h"
@@ -12,6 +13,9 @@ namespace Penjin {
         Window() = default;
         ~Window();
 
+        glm::ivec2 windowSize();
+        int width();
+        int height();
 
 
         Window(const Window&) = delete;
@@ -21,8 +25,8 @@ namespace Penjin {
         void closeWindow();
 
         void pollEvents();
-        bool shouldClose() const { return shouldClose_; }
-        bool swapBuffers() const;
+        [[nodiscard]] bool shouldClose() const { return shouldClose_; }
+        [[nodiscard]] bool swapBuffers() const;
 
 
         void setTitle(const std::string & string) const;

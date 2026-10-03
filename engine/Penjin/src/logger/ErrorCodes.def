@@ -1,0 +1,18 @@
+X(None,0, "No error")
+
+// Initialization
+X(WindowCreationFailed,1, "Window could not be created")
+X(RendererInitFailed, 2, "Renderer could not be initialized")
+
+// Shader
+X(ShaderLoadFailed, 20, "Shader could not be loaded")
+X(ShaderCompileFailed,21, "Shader compilation failed")
+X(ShaderLinkFailed, 22, "Shader program could not be linked")
+
+// Texture
+X(TextureLoadFailed,30, "Texture could not be loaded")
+X(TextureCreationFailed,31, "Texture could not be created")
+
+// Resources
+X(ResourceNotFound, 40, "Resource not found")
+X(ResourceLoadFailed, 41, "Resource could not be loaded")
