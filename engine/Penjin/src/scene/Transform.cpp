@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <algorithm>
+#include <cmath>
 #include <stdexcept>
 
 #include "GameObject.h"
@@ -32,6 +33,30 @@ Transform::~Transform()
 void Transform::rotate(glm::vec3 vec) {
     glm::quat delta = glm::quat(vec);
     localRotation *= delta;
+}
+
+void Transform::lookAt(glm::vec3 target, glm::vec3 up) {
+    const glm::vec3 toTarget = target - worldPosition();
+    if (glm::dot(toTarget, toTarget) < 1e-12f) {
+        return; // target is at our position, no defined direction
+    }
+
+    const glm::vec3 direction = glm::normalize(toTarget);
+
+    // Up must not be parallel to the view direction, otherwise the basis is degenerate
+    glm::vec3 safeUp = glm::normalize(up);
+    if (std::abs(glm::dot(direction, safeUp)) > 0.9999f) {
+        safeUp = std::abs(direction.z) < 0.9999f
+            ? glm::vec3(0.0f, 0.0f, 1.0f)
+            : glm::vec3(0.0f, 1.0f, 0.0f);
+    }
+
+    // Local -Z points at the target, local +Y towards up (OpenGL camera convention)
+    const glm::quat worldRot = glm::quatLookAt(direction, safeUp);
+
+    localRotation = parent_
+        ? glm::normalize(glm::inverse(parent_->worldRotation()) * worldRot)
+        : worldRot;
 }
 
 glm::mat4 Transform::localMatrix() const

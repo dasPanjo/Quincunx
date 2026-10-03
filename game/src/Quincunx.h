@@ -9,6 +9,7 @@
 #include "Logger.h"
 #include "MeshRenderer.h"
 #include "Model.h"
+#include "../../engine/Penjin/src/debug/Gizmos.h"
 #include "Components/TitleUpdater.h"
 
 
@@ -30,9 +31,11 @@ class Quincunx : public Penjin::Application {
 
             testGameObject1_ = &scene().createGameObject("Quad 1");
             auto& meshRenderer1 = testGameObject1_->addComponent<Penjin::MeshRenderer>();
+            testGameObject1_->transform().localPosition = {0.0f, 0.0f, 0.5f};
 
             testGameObject2_ = &scene().createGameObject("Quad 2");
             auto& meshRenderer2 = testGameObject2_->addComponent<Penjin::MeshRenderer>();
+            testGameObject2_->transform().localPosition = {0.0f, 0.0f, -0.5f};
 
             auto redMaterial = std::make_shared<Penjin::Material>(baseShader, "Red material");
             redMaterial->baseColor_ = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -50,18 +53,20 @@ class Quincunx : public Penjin::Application {
             meshRenderer1.model_ = model;
             meshRenderer2.model_ = model;
 
+            scene().mainCamera->transform().localPosition = {-5.0f, 0.0f, -10.0f};
+
         }
         void tick() override {
             Application::tick();
-            if (testGameObject1_ == nullptr) return;
-            testGameObject1_->transform().localPosition.x = std::sin(Penjin::Time::get().totalNanosecondsMs() * 0.001f) * 0.5f;
-            testGameObject1_->transform().rotate(glm::vec3(Penjin::Time::get().deltaTime()));
+            auto x = std::sin(Penjin::Time::get().totalNanosecondsMs() * 0.001f);
+            auto z = std::cos(Penjin::Time::get().totalNanosecondsMs() * 0.001f);
+            scene().mainCamera->transform().localPosition = {x * 7.0f, 2.0f, z * 7.0f};
+            scene().mainCamera->transform().lookAt({0.0f, 0.0f, 0.0f});
 
-            testGameObject2_->transform().localPosition.x = std::cos(Penjin::Time::get().totalNanosecondsMs() * 0.001f) * 0.5f;
-            testGameObject2_->transform().rotate(glm::vec3(-Penjin::Time::get().deltaTime()));
         }
         void draw() override {
             Application::draw();
+            Penjin::Gizmos::drawGrid();
         }
 
     private:

@@ -74,7 +74,7 @@ std::shared_ptr<Penjin::Shader> Penjin::Shader::createUnlitColor() {
 
         "void main() { "
         "   texCoord = aUV;"
-        "   gl_Position = uModel * uView * vec4(aPosition, 1.0);"
+        "   gl_Position = uProjection * uView * uModel * vec4(aPosition, 1.0);"
         "}";
 
     const std::string fragmentSource =

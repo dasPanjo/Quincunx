@@ -50,6 +50,8 @@ add_library(Penjin
         graphics/Model.h
         graphics/Camera.cpp
         graphics/Camera.h
+        debug/Gizmos.cpp
+        debug/Gizmos.h
 )
 
 target_include_directories(Penjin

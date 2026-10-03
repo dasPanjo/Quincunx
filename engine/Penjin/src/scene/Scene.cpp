@@ -19,6 +19,7 @@ void Penjin::Scene::draw(IRenderer &renderer) const {
         LOG_WARN("No main camera in scene!");
         return;
     }
+    renderer.setViewProjection(mainCamera->viewMatrix(), mainCamera->projectionMatrix());
     for (auto &gameObject : gameObjects_) {
         if(gameObject->transform().parent() == nullptr)
             gameObject->draw(renderer);

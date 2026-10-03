@@ -12,5 +12,8 @@ namespace Penjin {
 
         void setViewProjection(const glm::mat4& view, const glm::mat4& projection) override;
         void drawMesh(const Mesh& mesh, const Material& material, const glm::mat4& modelMatrix) override;
+    private:
+        glm::mat4 viewMatrix_;
+        glm::mat4 projectionMatrix_;
     };
 }

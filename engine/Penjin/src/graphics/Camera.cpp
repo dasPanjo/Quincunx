@@ -7,15 +7,17 @@
 #include "Application.h"
 
 glm::mat4 Penjin::Camera::viewMatrix() const {
+    const Transform &transform = gameObject().transform();
+    glm::mat4 cameraWorld = glm::translate(glm::mat4(1.0f), transform.worldPosition())  * glm::mat4_cast(transform.worldRotation());
+    return glm::inverse(cameraWorld);
+}
+
+glm::mat4 Penjin::Camera::projectionMatrix() const {
     glm::ivec2 windowSize = Application::get().window().windowSize();
     float aspect = (float)windowSize.x / (float)windowSize.y;
-    glm::mat4 viewMatrix = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
-    viewMatrix = glm::translate(viewMatrix, glm::vec3(gameObject().transform().worldPosition()));
-    return viewMatrix;
+    return glm::perspective(glm::radians(fov), aspect, nearPlane, farPlane);
 }
 
 void Penjin::Camera::tick() {
     Component::tick();
-//    transform().localPosition.x += 10 * Time::get().deltaTime() * 0.01f;
-    transform().localPosition.z = -10;
 }
